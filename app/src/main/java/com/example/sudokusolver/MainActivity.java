@@ -15,11 +15,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
 //    private ProgressBar progressBar;
     private ProgressDialog progressDialog;
+    private GridLayout gridLayout;
+    private Board boardDisplay;
 
 
     @Override
@@ -27,13 +33,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        GridLayout gridLayout = findViewById(R.id.grid_layout);
+        gridLayout = findViewById(R.id.grid_layout);
 
         // initialise 9x9 grid of EditText views
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 final EditText editText = new EditText(this);
 //                editText.setText(String.valueOf(col + col/3));
+                editText.setId(getResources().getIdentifier("s"+row+col, "id", getPackageName()));
                 editText.setInputType(InputType.TYPE_CLASS_NUMBER);
                 editText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
                 editText.addTextChangedListener(new TextWatcher() {
@@ -119,17 +126,119 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.show(getSupportFragmentManager(), "progress");
     }
 
+    private void updateGrid(Board board) {
+        for (int row = 0; row < Board.BOARDSIZE; row++) {
+            for (int col = 0; col < Board.BOARDSIZE; col++) {
+                EditText editText = gridLayout.findViewById(
+                        getResources().getIdentifier("s"+row+col, "id", getPackageName()));
+                int squareVal = board.getSquare(row, col);
+                if (squareVal == 0) {
+                    editText.setText("");
+                } else {
+                    editText.setText(String.valueOf(squareVal));
+                }
+            }
+        }
+    }
+
     private class Solver extends Thread {
+        private Board board = new Board();
+        private List<int[]> squaresToSolve;
+        private int numMoves = 0;
+        private boolean solved = false;
 
         @Override
         public void run() {
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 10; j++) {
-                    progressDialog.incrementProgressBy(1);
-                    try {
-                        sleep(50);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+            getBoard();
+            squaresToSolve = board.getBlankSquares();
+
+            int pointer = 0;
+            iterValsFor(pointer, true);
+
+        }
+
+        private void getBoard() {
+            for (int row = 0; row < Board.BOARDSIZE; row++) {
+                for (int col = 0; col < Board.BOARDSIZE; col++) {
+                    EditText editText = gridLayout.findViewById(
+                            getResources().getIdentifier("s"+row+col, "id", getPackageName()));
+                    String valStr = editText.getText().toString();
+                    int val;
+                    if (valStr.equals("")) {
+                        val = Board.BLANK;
+                    } else {
+                        val = Integer.parseInt(valStr);
+                    }
+                    board.setSquare(row, col, val);
+                }
+            }
+        }
+
+        private boolean isValInRow(int val, int row) {
+            for (int v : board.getRow(row)) {
+                if (v == val) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private boolean isValInCol(int val, int col) {
+            for (int v : board.getCol(col)) {
+                if (v == val) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private boolean isValInBox(int val, int row, int col) {
+            for (int v : board.getBox(row, col)) {
+                if (v == val) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private boolean isDigitValid(int val, int row, int col) {
+            return !isValInRow(val, row) && !isValInCol(val, col) && !isValInBox(val, row, col);
+        }
+
+        private void updateSquare(int pointer, int val) {
+            board.setSquare(squaresToSolve.get(pointer)[0], squaresToSolve.get(pointer)[1], val);
+//            updateEditText(String.valueOf(val), squaresToSolve.get(pointer)[0], squaresToSolve.get(pointer)[1]);
+            numMoves++;
+        }
+
+        private void iterValsFor(int pointer, boolean returnProgess) {
+            if (board.checkFinished()) {
+                solved = true;
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateGrid(board);
+                    }
+                });
+            } else {
+                for (int digit = 1; digit < 10; digit++) {
+                    if (solved) {
+                        break;
+                    }
+                    if (isDigitValid(digit, squaresToSolve.get(pointer)[0], squaresToSolve.get(pointer)[1])) {
+                        updateSquare(pointer, digit);
+
+                        if (pointer < squaresToSolve.size()-1) {
+                            iterValsFor(pointer + 1, false);
+                        }
+
+                        updateSquare(pointer, Board.BLANK);
+                        progressDialog.incrementProgressBy(10);
+                        try {
+                            sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }

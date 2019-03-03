@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="s00" type="id" />
+    <item name="s01" type="id" />
+    <item name="s02" type="id" />
+    <item name="s03" type="id" />
+    <item name="s04" type="id" />
+    <item name="s05" type="id" />
+    <item name="s06" type="id" />
+    <item name="s07" type="id" />
+    <item name="s08" type="id" />
+
+    <item name="s10" type="id" />
+    <item name="s11" type="id" />
+    <item name="s12" type="id" />
+    <item name="s13" type="id" />
+    <item name="s14" type="id" />
+    <item name="s15" type="id" />
+    <item name="s16" type="id" />
+    <item name="s17" type="id" />
+    <item name="s18" type="id" />
+
+    <item name="s20" type="id" />
+    <item name="s21" type="id" />
+    <item name="s22" type="id" />
+    <item name="s23" type="id" />
+    <item name="s24" type="id" />
+    <item name="s25" type="id" />
+    <item name="s26" type="id" />
+    <item name="s27" type="id" />
+    <item name="s28" type="id" />
+
+    <item name="s30" type="id" />
+    <item name="s31" type="id" />
+    <item name="s32" type="id" />
+    <item name="s33" type="id" />
+    <item name="s34" type="id" />
+    <item name="s35" type="id" />
+    <item name="s36" type="id" />
+    <item name="s37" type="id" />
+    <item name="s38" type="id" />
+
+    <item name="s40" type="id" />
+    <item name="s41" type="id" />
+    <item name="s42" type="id" />
+    <item name="s43" type="id" />
+    <item name="s44" type="id" />
+    <item name="s45" type="id" />
+    <item name="s46" type="id" />
+    <item name="s47" type="id" />
+    <item name="s48" type="id" />
+
+    <item name="s50" type="id" />
+    <item name="s51" type="id" />
+    <item name="s52" type="id" />
+    <item name="s53" type="id" />
+    <item name="s54" type="id" />
+    <item name="s55" type="id" />
+    <item name="s56" type="id" />
+    <item name="s57" type="id" />
+    <item name="s58" type="id" />
+
+    <item name="s60" type="id" />
+    <item name="s61" type="id" />
+    <item name="s62" type="id" />
+    <item name="s63" type="id" />
+    <item name="s64" type="id" />
+    <item name="s65" type="id" />
+    <item name="s66" type="id" />
+    <item name="s67" type="id" />
+    <item name="s68" type="id" />
+
+    <item name="s70" type="id" />
+    <item name="s71" type="id" />
+    <item name="s72" type="id" />
+    <item name="s73" type="id" />
+    <item name="s74" type="id" />
+    <item name="s75" type="id" />
+    <item name="s76" type="id" />
+    <item name="s77" type="id" />
+    <item name="s78" type="id" />
+
+    <item name="s80" type="id" />
+    <item name="s81" type="id" />
+    <item name="s82" type="id" />
+    <item name="s83" type="id" />
+    <item name="s84" type="id" />
+    <item name="s85" type="id" />
+    <item name="s86" type="id" />
+    <item name="s87" type="id" />
+    <item name="s88" type="id" />
+</resources>
