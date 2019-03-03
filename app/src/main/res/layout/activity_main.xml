@@ -1,41 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:columnCount="9"
-    android:rowCount="9"
-    android:id="@+id/grid_layout"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity"
-    >
-
-    <!--<TextView-->
-        <!--android:id="@+id/title"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="19dp"-->
-        <!--android:text="Progress bar"-->
-        <!--android:layout_margin="16dp"-->
-        <!--/>-->
-
-    <!--<ProgressBar-->
-        <!--android:id="@+id/progress_bar"-->
-        <!--style="?android:attr/progressBarStyleHorizontal"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="48dp"-->
-        <!--android:max="100"-->
-        <!--android:indeterminate="false"-->
-        <!--/>-->
-
-
-    <EditText
+    android:orientation="vertical">
+    <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_row="0"
+        android:layout_margin="32dp"
+        android:layout_gravity="center_horizontal"
+        android:columnCount="9"
+        android:rowCount="9"
+        android:id="@+id/grid_layout"
+        >
+
+        <!--<TextView-->
+            <!--android:id="@+id/title"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="19dp"-->
+            <!--android:text="Progress bar"-->
+            <!--android:layout_margin="16dp"-->
+            <!--/>-->
+
+        <!--<ProgressBar-->
+            <!--android:id="@+id/progress_bar"-->
+            <!--style="?android:attr/progressBarStyleHorizontal"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="48dp"-->
+            <!--android:max="100"-->
+            <!--android:indeterminate="false"-->
+            <!--/>-->
+
+
+        <!--<EditText-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_column="0"-->
+            <!--android:layout_row="0"-->
+            <!--/>-->
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/btn_solve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="72dp"
+        android:text="@string/solve"
         />
-
-
-
-</GridLayout>
+</LinearLayout>
