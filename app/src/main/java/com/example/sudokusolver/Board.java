@@ -13,9 +13,9 @@ public class Board {
     private int[] DIGITS = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
     private int[][] board = new int[9][9];
-    private List<int[]> originalSquares = new ArrayList<>();
 
-    private void getOriginalSquares() {
+    public List<int[]> getOriginalSquares() {
+        List<int[]> originalSquares = new ArrayList<>();
         for (int row = 0; row < BOARDSIZE; row++) {
             for (int col = 0; col < BOARDSIZE; col++) {
                 if (board[row][col] != BLANK) {
@@ -23,10 +23,19 @@ public class Board {
                 }
             }
         }
+        return originalSquares;
     }
 
     public int[][] getBoard() {
         return board;
+    }
+
+    public void resetBoard() {
+        for (int row = 0; row < BOARDSIZE; row++) {
+            for (int col = 0; col < BOARDSIZE; col++) {
+                board[row][col] = BLANK;
+            }
+        }
     }
 
     public void setSquare(int row, int col, int val) {

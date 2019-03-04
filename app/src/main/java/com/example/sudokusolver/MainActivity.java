@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.Dialog;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
@@ -56,8 +58,14 @@ public class MainActivity extends AppCompatActivity {
                             return;
                         }
                         if (editText.getText().toString().length() == 1) {
-                            EditText nextView = (EditText) editText.focusSearch(View.FOCUS_FORWARD);
-                            nextView.requestFocus();
+                            if (!String.valueOf(editText.getId()).equals("s88")) {
+                                EditText nextView = (EditText) editText.focusSearch(View.FOCUS_FORWARD);
+                                nextView.requestFocus();
+                            } else {
+                                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                                View view = getCurrentFocus();
+                                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                            }
 //                            editText.requestFocus(View.FOCUS_FORWARD);
                         }
                     }
@@ -83,6 +91,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 showProgressDialog();
                 new Solver().start();
+            }
+        });
+
+        Button resetBtn = findViewById(R.id.btn_reset);
+        resetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateGrid(new Board());
             }
         });
 
@@ -128,6 +144,15 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.show(getSupportFragmentManager(), "progress");
     }
 
+    private void setOriginalSquaresBold(List<int[]> squares) {
+        for (int[] square : squares) {
+            EditText editText = gridLayout.findViewById(
+                    getResources().getIdentifier("s" + square[0] + square[1],
+                            "id", getPackageName()));
+            editText.setTypeface(editText.getTypeface(), Typeface.BOLD);
+        }
+    }
+
     private void updateGrid(Board board) {
         for (int row = 0; row < Board.BOARDSIZE; row++) {
             for (int col = 0; col < Board.BOARDSIZE; col++) {
@@ -146,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
     private class Solver extends Thread {
         private Board board = new Board();
         private List<int[]> squaresToSolve;
+        private List<int[]> originalSquares;
         private int numMoves = 0;
         private boolean solved = false;
 
@@ -153,7 +179,8 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             getBoard();
             squaresToSolve = board.getBlankSquares();
-            Log.d("DEBUG", "run");
+            originalSquares = board.getOriginalSquares();
+            setOriginalSquaresBold(originalSquares);
 
             int pointer = 0;
             iterValsFor(pointer);

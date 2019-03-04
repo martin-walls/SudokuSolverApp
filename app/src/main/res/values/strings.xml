@@ -2,4 +2,5 @@
     <string name="app_name">Sudoku Solver</string>
     <string name="solve">Solve</string>
     <string name="solving">Solving...</string>
+    <string name="reset">Reset</string>
 </resources>
