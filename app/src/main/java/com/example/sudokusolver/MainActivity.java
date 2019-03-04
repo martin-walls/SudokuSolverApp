@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                             return;
                         }
                         if (editText.getText().toString().length() == 1) {
-                            if (!String.valueOf(editText.getId()).equals("s88")) {
+                            if (!getResources().getResourceEntryName(editText.getId()).equals("s88")) {
                                 EditText nextView = (EditText) editText.focusSearch(View.FOCUS_FORWARD);
                                 nextView.requestFocus();
                             } else {
@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
                 params.width = GridLayout.LayoutParams.WRAP_CONTENT;
                 params.columnSpec = GridLayout.spec(col);
                 params.rowSpec = GridLayout.spec(row);
+                params.leftMargin = getResources().getDimensionPixelSize(R.dimen.square_spacing);
+                params.rightMargin = getResources().getDimensionPixelSize(R.dimen.square_spacing);
                 editText.setLayoutParams(params);
 
                 gridLayout.addView(editText);
@@ -180,7 +182,13 @@ public class MainActivity extends AppCompatActivity {
             getBoard();
             squaresToSolve = board.getBlankSquares();
             originalSquares = board.getOriginalSquares();
-            setOriginalSquaresBold(originalSquares);
+            MainActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setOriginalSquaresBold(originalSquares);
+
+                }
+            });
 
             int pointer = 0;
             iterValsFor(pointer);
