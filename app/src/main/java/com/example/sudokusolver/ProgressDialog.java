@@ -24,15 +24,4 @@ public class ProgressDialog extends DialogFragment {
 
         return builder.create();
     }
-
-    public void incrementProgressBy(int diff) {
-        if (progressBar == null) {
-            return;
-        }
-        progressBar.incrementProgressBy(diff);
-
-        if (progressBar.getProgress() >= 100) {
-            this.dismiss();
-        }
-    }
 }

@@ -1,5 +1,7 @@
 package com.example.sudokusolver;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -77,14 +79,16 @@ public class Board {
     }
 
     public boolean checkFinished() {
-        for (int[] row : board) {
-            for (int val : row) {
-                if (val == BLANK) {
+        Log.d("DEBUG", "checkFinished");
+        for (int row = 0; row < BOARDSIZE; row++) {
+            for (int col = 0; col < BOARDSIZE; col++) {
+                if (board[row][col] == BLANK) {
                     return false;
                 }
             }
         }
-        return verifySolved();
+//        return verifySolved();
+        return true;
     }
 
     private boolean verifySolved() {

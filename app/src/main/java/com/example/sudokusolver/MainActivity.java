@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -18,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -151,9 +153,18 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             getBoard();
             squaresToSolve = board.getBlankSquares();
+            Log.d("DEBUG", "run");
 
             int pointer = 0;
-            iterValsFor(pointer, true);
+            iterValsFor(pointer);
+
+            MainActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    updateGrid(board);
+                    progressDialog.dismiss();
+                }
+            });
 
         }
 
@@ -209,39 +220,39 @@ public class MainActivity extends AppCompatActivity {
             board.setSquare(squaresToSolve.get(pointer)[0], squaresToSolve.get(pointer)[1], val);
 //            updateEditText(String.valueOf(val), squaresToSolve.get(pointer)[0], squaresToSolve.get(pointer)[1]);
             numMoves++;
+            Log.d("DEBUG", Arrays.deepToString(board.getBoard()));
         }
 
-        private void iterValsFor(int pointer, boolean returnProgess) {
-            if (board.checkFinished()) {
-                solved = true;
-                MainActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        updateGrid(board);
-                    }
-                });
-            } else {
-                for (int digit = 1; digit < 10; digit++) {
-                    if (solved) {
-                        break;
-                    }
-                    if (isDigitValid(digit, squaresToSolve.get(pointer)[0], squaresToSolve.get(pointer)[1])) {
-                        updateSquare(pointer, digit);
+        private boolean iterValsFor(int pointer) {
+            boolean solved = false;
+            for (int digit = 1; digit < 10; digit++) {
+//                    Log.d("DEBUG", "next digit: " + digit);
+                if (isDigitValid(digit, squaresToSolve.get(pointer)[0], squaresToSolve.get(pointer)[1])) {
+                    updateSquare(pointer, digit);
 
-                        if (pointer < squaresToSolve.size()-1) {
-                            iterValsFor(pointer + 1, false);
+                    if (pointer == squaresToSolve.size()-1) {
+                        finished();
+                        return true;
+                    }
+
+                    if (pointer < squaresToSolve.size()-1) {
+                        solved = iterValsFor(pointer + 1);
+                        if (solved) {
+                            return true;
                         }
+                    }
 
+                    if (!solved) {
                         updateSquare(pointer, Board.BLANK);
-                        progressDialog.incrementProgressBy(10);
-                        try {
-                            sleep(200);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+//                            Log.d("DEBUG", "reset square");
                     }
                 }
             }
+            return solved;
+        }
+
+        private void finished() {
+            Log.e("DEBUG", Arrays.deepToString(board.getBoard()));
         }
     }
 }
