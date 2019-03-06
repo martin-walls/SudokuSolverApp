@@ -186,7 +186,6 @@ public class MainActivity extends AppCompatActivity {
         private List<int[]> squaresToSolve;
         private List<int[]> originalSquares;
         private int numMoves = 0;
-        private boolean solved = false;
 
         @Override
         public void run() {
@@ -266,18 +265,15 @@ public class MainActivity extends AppCompatActivity {
             board.setSquare(squaresToSolve.get(pointer)[0], squaresToSolve.get(pointer)[1], val);
 //            updateEditText(String.valueOf(val), squaresToSolve.get(pointer)[0], squaresToSolve.get(pointer)[1]);
             numMoves++;
-//            Log.d("DEBUG", Arrays.deepToString(board.getBoard()));
         }
 
         private boolean iterValsFor(int pointer) {
             boolean solved = false;
             for (int digit = 1; digit < 10; digit++) {
-//                    Log.d("DEBUG", "next digit: " + digit);
                 if (isDigitValid(digit, squaresToSolve.get(pointer)[0], squaresToSolve.get(pointer)[1])) {
                     updateSquare(pointer, digit);
 
                     if (pointer == squaresToSolve.size()-1) {
-                        finished();
                         return true;
                     }
 
@@ -288,17 +284,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
-                    if (!solved) {
-                        updateSquare(pointer, Board.BLANK);
-//                            Log.d("DEBUG", "reset square");
-                    }
+                    updateSquare(pointer, Board.BLANK);
                 }
             }
             return solved;
-        }
-
-        private void finished() {
-//            Log.e("DEBUG", Arrays.deepToString(board.getBoard()));
         }
     }
 }
