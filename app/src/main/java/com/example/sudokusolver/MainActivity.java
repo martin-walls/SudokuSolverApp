@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateGrid(new Board());
+                resetBoard();
             }
         });
 
@@ -166,6 +166,17 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     editText.setText(String.valueOf(squareVal));
                 }
+            }
+        }
+    }
+
+    private void resetBoard() {
+        for (int row = 0; row < Board.BOARDSIZE; row++) {
+            for (int col = 0; col < Board.BOARDSIZE; col++) {
+                EditText editText = gridLayout.findViewById(
+                        getResources().getIdentifier("s" + row + col, "id", getPackageName()));
+                editText.setTypeface(editText.getTypeface(), Typeface.NORMAL); //FIXME
+                editText.setText("");
             }
         }
     }
@@ -255,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
             board.setSquare(squaresToSolve.get(pointer)[0], squaresToSolve.get(pointer)[1], val);
 //            updateEditText(String.valueOf(val), squaresToSolve.get(pointer)[0], squaresToSolve.get(pointer)[1]);
             numMoves++;
-            Log.d("DEBUG", Arrays.deepToString(board.getBoard()));
+//            Log.d("DEBUG", Arrays.deepToString(board.getBoard()));
         }
 
         private boolean iterValsFor(int pointer) {
@@ -287,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private void finished() {
-            Log.e("DEBUG", Arrays.deepToString(board.getBoard()));
+//            Log.e("DEBUG", Arrays.deepToString(board.getBoard()));
         }
     }
 }
