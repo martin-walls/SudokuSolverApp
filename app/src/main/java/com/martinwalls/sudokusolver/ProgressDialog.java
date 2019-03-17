@@ -1,4 +1,4 @@
-package com.example.sudokusolver;
+package com.martinwalls.sudokusolver;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
