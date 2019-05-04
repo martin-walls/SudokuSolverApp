@@ -1,20 +1,13 @@
 package com.martinwalls.sudokusolver;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
 
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,54 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         gridLayout = findViewById(R.id.grid_layout);
 
-        // initialise 9x9 grid of EditText views
-        for (int row = 0; row < 9; row++) {
-            for (int col = 0; col < 9; col++) {
-                final EditText editText = new EditText(this);
-//                editText.setText(String.valueOf(col + col/3));
-                editText.setId(getResources().getIdentifier("s"+row+col, "id", getPackageName()));
-                editText.setInputType(InputType.TYPE_CLASS_NUMBER);
-                editText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
-                editText.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        if (editText.getText().toString().equals("0")) {
-                            editText.setText("");
-                            return;
-                        }
-                        if (editText.getText().toString().length() == 1) {
-                            if (!getResources().getResourceEntryName(editText.getId()).equals("s88")) {
-                                EditText nextView = (EditText) editText.focusSearch(View.FOCUS_FORWARD);
-                                nextView.requestFocus();
-                            } else {
-                                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                                View view = getCurrentFocus();
-                                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                            }
-//                            editText.requestFocus(View.FOCUS_FORWARD);
-                        }
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {}
-                });
-
-                GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-                params.height = GridLayout.LayoutParams.WRAP_CONTENT;
-                params.width = GridLayout.LayoutParams.WRAP_CONTENT;
-                params.columnSpec = GridLayout.spec(col);
-                params.rowSpec = GridLayout.spec(row);
-                params.leftMargin = getResources().getDimensionPixelSize(R.dimen.square_spacing);
-                params.rightMargin = getResources().getDimensionPixelSize(R.dimen.square_spacing);
-                editText.setLayoutParams(params);
-
-                gridLayout.addView(editText);
-            }
-        }
-
+        /*
         Button solveBtn = findViewById(R.id.btn_solve);
         solveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +40,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 resetBoard();
             }
-        });
+        });*/
+    }
+
+//    public void squareOnClick(View view) {
+//        view.requestFocus();
+//    }
 
 //        ProgressDialog progressDialog = new ProgressDialog(this);
 //        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -121,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 //        }).start();
 
 //        new Solver().start();
-    }
+//    }
 
 //    private void showProgressDialog() {
 //        progressDialog = new ProgressDialog(this);
