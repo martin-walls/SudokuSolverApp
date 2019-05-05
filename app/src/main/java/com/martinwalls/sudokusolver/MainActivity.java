@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        gridLayout = findViewById(R.id.grid_layout);
+        gridLayout = findViewById(R.id.sudoku_grid);
 
         /*
         Button solveBtn = findViewById(R.id.btn_solve);

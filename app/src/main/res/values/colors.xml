@@ -6,5 +6,8 @@
 
     <color name="darkGrey">#242424</color>
     <color name="lightGrey">#ddd</color>
-    <color name="blue">#7597D3</color>
+    <color name="blue">#87A9E2</color>
+
+    <color name="keypad">#7A7A7A</color>
+    <color name="keypad_dark">#5A5A5A</color>
 </resources>
