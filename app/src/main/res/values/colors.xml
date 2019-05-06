@@ -8,6 +8,7 @@
     <color name="lightGrey">#ddd</color>
     <color name="blue">#87A9E2</color>
 
-    <color name="keypad">#7A7A7A</color>
-    <color name="keypad_dark">#5A5A5A</color>
+    <color name="keypad_background">#363B40</color>
+    <color name="keypad_background_dark">#292E33</color>
+    <color name="keypad_text">#fff</color>
 </resources>

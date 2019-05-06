@@ -10,14 +10,16 @@
 
     <style name="Keypad">
         <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/keypad_text</item>
+        <item name="android:stateListAnimator">@null</item>
     </style>
 
     <style name="Keypad.Number">
-        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:background">@drawable/keypad_ripple_effect</item>
     </style>
 
     <style name="Keypad.ControlButton">
-        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:background">@drawable/keypad_ripple_effect_dark</item>
     </style>
 
 </resources>

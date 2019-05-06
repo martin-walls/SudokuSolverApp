@@ -4,9 +4,8 @@
     android:layout_height="wrap_content"
     android:rowCount="3"
     android:columnCount="4"
-    android:background="@color/keypad"
+    android:background="@color/keypad_background"
     >
-
 
     <!-- clear button -->
     <Button
