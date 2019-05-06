@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/sudoku_cell"
         android:gravity="center"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:textColor="@color/darkGrey"
         android:clickable="true"
         android:focusable="true"

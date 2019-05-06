@@ -69,12 +69,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void showProgressDialog() {
-        progressDialog = new ProgressDialog();
-        progressDialog.show(getSupportFragmentManager(), "progress");
-    }
-
-    //TODO
     private void setOriginalSquares(List<int[]> originalSquares) {
         for (int i = 0; i < sudokuGrid.getChildCount(); i++) {
             GridLayout box = (GridLayout) sudokuGrid.getChildAt(i);
