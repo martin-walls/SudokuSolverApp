@@ -5,8 +5,11 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="darkGrey">#242424</color>
-    <color name="lightGrey">#ddd</color>
-    <color name="blue">#87A9E2</color>
+
+    <color name="sudokuSquare_normal">#ddd</color>
+    <color name="sudokuSquare_focused">#87A9E2</color>
+
+    <color name="originalSquare">#D56C6C</color>
 
     <color name="keypad_background">#363B40</color>
     <color name="keypad_background_dark">#292E33</color>

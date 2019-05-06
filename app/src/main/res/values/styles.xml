@@ -16,6 +16,7 @@
 
     <style name="Keypad.Number">
         <item name="android:background">@drawable/keypad_ripple_effect</item>
+        <item name="android:onClick">keypadNumberOnClick</item>
     </style>
 
     <style name="Keypad.ControlButton">

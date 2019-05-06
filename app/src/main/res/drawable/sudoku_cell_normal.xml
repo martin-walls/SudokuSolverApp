@@ -8,7 +8,7 @@
         />
 
     <solid
-        android:color="@color/lightGrey"
+        android:color="@color/sudokuSquare_normal"
         />
 
 </shape>

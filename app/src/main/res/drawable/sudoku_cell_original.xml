@@ -8,7 +8,7 @@
         />
 
     <solid
-        android:color="@color/sudokuSquare_focused"
+        android:color="@color/originalSquare"
         />
 
 </shape>
