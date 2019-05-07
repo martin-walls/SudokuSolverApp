@@ -16,4 +16,10 @@
     <string name="keypad_8">8</string>
     <string name="keypad_9">9</string>
     <string name="blank_square">&#160;</string>
+
+    <string name="solveError_gridEmpty">Error: Can\'t solve empty grid</string>
+    <string name="solveError_gridFull">Error: Can\'t solve full grid</string>
+    <string name="solveError_unsolvable">Error: unsolvable grid</string>
+
+    <string name="solved_num_moves">Solved in %d moves</string>
 </resources>

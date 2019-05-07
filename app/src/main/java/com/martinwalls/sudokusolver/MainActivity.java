@@ -129,13 +129,15 @@ public class MainActivity extends AppCompatActivity {
         private Board board = new Board();
         private List<int[]> squaresToSolve;
         private List<int[]> originalSquares;
-        private int numMoves = 0;
+        private int numMoves;
 
         @Override
         public void run() {
-            if (getBoard()) {
-                squaresToSolve = board.getBlankSquares();
-                originalSquares = board.getOriginalSquares();
+            boolean boardIsValid = getBoard();
+            squaresToSolve = board.getBlankSquares();
+            originalSquares = board.getOriginalSquares();
+            // if board is solvable, and is not full or empty
+            if (boardIsValid && squaresToSolve.size() != 0 && originalSquares.size() != 0) {
                 MainActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -143,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+                // solve grid
                 int pointer = 0;
                 iterValsFor(pointer);
 
@@ -150,14 +153,28 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         updateGridToSolution(board);
-//                        progressDialog.dismiss();
+                        Toast.makeText(MainActivity.this, getString(R.string.solved_num_moves, numMoves), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else if (squaresToSolve.size() == 0) {
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, getString(R.string.solveError_gridFull), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else if (originalSquares.size() == 0) {
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, getString(R.string.solveError_gridEmpty), Toast.LENGTH_SHORT).show();
                     }
                 });
             } else {
                 MainActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(MainActivity.this, "Error: unsolvable grid", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, getString(R.string.solveError_unsolvable), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
