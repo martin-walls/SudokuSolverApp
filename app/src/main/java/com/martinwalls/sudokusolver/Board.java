@@ -7,12 +7,18 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Board {
-    static int BOARDSIZE = 9;
-    static int BLANK = 0;
-    private int[] DIGITS = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    private static final int BOARDSIZE = 9;
+    static final int BLANK = 0;
+    private final int[] DIGITS = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
+    // initialise blank board
     private int[][] board = new int[9][9];
 
+    /**
+     * Gets a List of all the blank squares in the grid at the start, i.e. the squares
+     * entered by the user.
+     * @return a List of the original squares
+     */
     public List<int[]> getOriginalSquares() {
         List<int[]> originalSquares = new ArrayList<>();
         for (int row = 0; row < BOARDSIZE; row++) {
@@ -25,30 +31,30 @@ public class Board {
         return originalSquares;
     }
 
-    public int[][] getBoard() {
-        return board;
-    }
-
-    public void resetBoard() {
-        for (int row = 0; row < BOARDSIZE; row++) {
-            for (int col = 0; col < BOARDSIZE; col++) {
-                board[row][col] = BLANK;
-            }
-        }
-    }
-
+    /**
+     * Sets the value of the square at {@code [row, col]} to {@code val}
+     */
     public void setSquare(int row, int col, int val) {
         board[row][col] = val;
     }
 
+    /**
+     * Returns the value of the square at {@code [row, col]}
+     */
     public int getSquare(int row, int col) {
         return board[row][col];
     }
 
+    /**
+     * Returns an array of the values in the specified row
+     */
     public int[] getRow(int row) {
         return board[row];
     }
 
+    /**
+     * Returns an array of the values in the specified column
+     */
     public int[] getCol(int col) {
         int[] result = new int[9];
         for (int i = 0; i < BOARDSIZE; i++) {
@@ -57,6 +63,9 @@ public class Board {
         return result;
     }
 
+    /**
+     * Returns an array of the values in the box surrounding the square at {@code [row, col]}
+     */
     public int[] getBox(int row, int col) {
         int[][] groups = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}};
 
@@ -74,6 +83,9 @@ public class Board {
         return valsInBox;
     }
 
+    /**
+     * Returns a List of all the blank squares currently on the board
+     */
     public List<int[]> getBlankSquares() {
         List<int[]> blankSquares = new ArrayList<>();
         for (int row = 0; row < BOARDSIZE; row++) {
