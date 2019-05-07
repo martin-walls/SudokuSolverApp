@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
 //    private ProgressBar progressBar;
-    private ProgressDialog progressDialog;
     private GridLayout sudokuGrid;
 
     private TextView focusedSquare;

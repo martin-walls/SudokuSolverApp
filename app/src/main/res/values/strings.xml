@@ -1,7 +1,4 @@
 <resources>
-    <string name="progress_solving">Solving...</string>
-
-
     <string name="button_reset">Reset</string>
     <string name="button_solve">Solve</string>
     <string name="button_clear">Clear</string>
