@@ -4,11 +4,11 @@
 
     <stroke
         android:width="1dp"
-        android:color="@color/darkGrey"
+        android:color="?attr/gridOutlineColor"
         />
 
     <solid
-        android:color="@color/sudokuSquare_normal"
+        android:color="?attr/squareBackgroundColor"
         />
 
 </shape>

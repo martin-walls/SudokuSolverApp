@@ -1,16 +1,39 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppThemeLight" parent="Theme.AppCompat.Light">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="gridOutlineColor">@color/gridOutline</item>
+        <item name="squareBackgroundColor">@color/sudokuSquareNormal</item>
+        <item name="focusedSquareBackgroundColor">@color/sudokuSquareFocused</item>
+        <item name="originalSquareBackgroundColor">@color/sudokuSquareOriginal</item>
+        <item name="focusedOriginalSquareBackgroundColor">@color/sudokuSquareOriginalFocused</item>
+        <item name="squareTextColor">@color/sudokuSquareText</item>
+        <item name="keypadBackgroundColor">@color/keypadBackground</item>
+        <item name="keypadBackgroundColorDark">@color/keypadBackgroundDark</item>
+        <item name="keypadTextColor">@color/keypadText</item>
+    </style>
+
+    <style name="AppThemeDark" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/darkColorPrimary</item>
+        <item name="colorPrimaryDark">@color/darkColorPrimaryDark</item>
+        <item name="colorAccent">@color/darkColorAccent</item>
+        <item name="gridOutlineColor">@color/darkGridOutline</item>
+        <item name="squareBackgroundColor">@color/darkSudokuSquareNormal</item>
+        <item name="focusedSquareBackgroundColor">@color/darkSudokuSquareFocused</item>
+        <item name="originalSquareBackgroundColor">@color/darkSudokuSquareOriginal</item>
+        <item name="focusedOriginalSquareBackgroundColor">@color/darkSudokuSquareOriginalFocused</item>
+        <item name="squareTextColor">@color/darkSudokuSquareText</item>
+        <item name="keypadBackgroundColor">@color/darkKeypadBackground</item>
+        <item name="keypadBackgroundColorDark">@color/darkKeypadBackgroundDark</item>
+        <item name="keypadTextColor">@color/darkKeypadText</item>
     </style>
 
     <style name="Keypad">
         <item name="android:textSize">24sp</item>
-        <item name="android:textColor">@color/keypad_text</item>
+        <item name="android:textColor">?attr/keypadTextColor</item>
         <item name="android:stateListAnimator">@null</item>
     </style>
 

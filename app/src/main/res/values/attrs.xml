@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="gridOutlineColor" format="reference" />
+    <attr name="squareBackgroundColor" format="reference" />
+    <attr name="focusedSquareBackgroundColor" format="reference" />
+    <attr name="originalSquareBackgroundColor" format="reference" />
+    <attr name="focusedOriginalSquareBackgroundColor" format="reference" />
+    <attr name="squareTextColor" format="reference" />
+    <attr name="keypadBackgroundColor" format="reference" />
+    <attr name="keypadBackgroundColorDark" format="reference" />
+    <attr name="keypadTextColor" format="reference" />
+</resources>

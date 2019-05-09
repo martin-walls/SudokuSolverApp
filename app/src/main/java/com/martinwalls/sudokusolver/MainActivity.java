@@ -1,6 +1,10 @@
 package com.martinwalls.sudokusolver;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -16,9 +20,25 @@ public class MainActivity extends AppCompatActivity {
     // the layout holding all the sudoku squares
     private GridLayout sudokuGrid;
 
+    private final String PREFERENCE_THEME = "current_theme";
+    private final int THEME_LIGHT = 0;
+    private final int THEME_DARK = 1;
+
+    private int currentTheme;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        currentTheme = sharedPref.getInt(PREFERENCE_THEME, THEME_LIGHT);
+        switch (currentTheme) {
+            case THEME_DARK:
+                setTheme(R.style.AppThemeDark);
+                break;
+            case THEME_LIGHT:
+                setTheme(R.style.AppThemeLight);
+                break;
+        }
         setContentView(R.layout.activity_main);
 
         sudokuGrid = findViewById(R.id.sudoku_grid);
@@ -49,12 +69,57 @@ public class MainActivity extends AppCompatActivity {
                 new Solver().start();
             }
         });
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int theme = PreferenceManager.getDefaultSharedPreferences(this)
+                .getInt(PREFERENCE_THEME, THEME_LIGHT);
+        if (theme != currentTheme) {
+            recreate();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        int currentTheme = sharedPref.getInt(PREFERENCE_THEME, THEME_LIGHT);
+        switch (currentTheme) {
+            case THEME_DARK:
+                getMenuInflater().inflate(R.menu.menu_option_light, menu);
+                break;
+            case THEME_LIGHT:
+                getMenuInflater().inflate(R.menu.menu_option_dark, menu);
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_dark_theme:
+                setAppTheme(THEME_DARK);
+                return true;
+            case R.id.action_light_theme:
+                setAppTheme(THEME_LIGHT);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    private void setAppTheme(int theme) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPref.edit().putInt(PREFERENCE_THEME, theme).apply();
+        recreate();
     }
 
     /**
      * OnClick function for the numbers 1-9 on the keypad, called from {@code onClick} attribute in {@code styles.xml}
-     * @param view the calling view (
+     * @param view the calling view
      */
     public void keypadNumberOnClick(View view) {
         // get the sudoku square that is currently focused, if it exists
@@ -118,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                 square.setText(getString(R.string.blank_square));
                 square.setBackground(getDrawable(R.drawable.sudoku_cell));
                 // allow the user to interact with the grid again
-                square.setFocusableInTouchMode(true);
+//                square.setFocusableInTouchMode(true);
             }
         }
         // remove focus from the focused view, so no square is highlighted
@@ -144,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
                     square.setText(String.valueOf(val));
                 }
                 // prevent the user interacting with the board in its solved state
-                square.setFocusableInTouchMode(false);
+//                square.setFocusableInTouchMode(false);
             }
         }
         clearFocus();

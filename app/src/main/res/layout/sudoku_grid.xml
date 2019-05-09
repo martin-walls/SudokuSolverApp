@@ -5,7 +5,7 @@
     android:columnCount="9"
     android:rowCount="9"
     android:background="@drawable/outline"
-    android:padding="2dp"
+    android:padding="1dp"
     >
 
     <!-- row 1 -->

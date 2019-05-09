@@ -4,7 +4,7 @@
     <item>
         <shape android:shape="rectangle">
             <solid
-                android:color="@color/keypad_background" />
+                android:color="?attr/keypadBackgroundColor" />
         </shape>
     </item>
 
